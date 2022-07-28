@@ -3,10 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/button_circle_blue.xml" value="0.111" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/button_grey.xml" value="0.111" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/button_left_grey.xml" value="0.111" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/button_right_blue.xml" value="0.111" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/edit_text_shape.xml" value="0.1" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/ic_launcher_background.xml" value="0.11" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/menu.xml" value="0.2095" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/drawable/menu_rounded_corners.xml" value="0.121" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_about.xml" value="0.8502604166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_finishedplay.xml" value="0.621875" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_history.xml" value="0.5065104166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_input_words.xml" value="0.5" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_main.xml" value="0.5065104166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_play.xml" value="0.5065104166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_recording.xml" value="0.5065104166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_set_name.xml" value="0.5677083333333334" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_settings.xml" value="0.8502604166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/simple_list_item_1.xml" value="0.4765625" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="16" project-jdk-type="JavaSDK" />
 </project>

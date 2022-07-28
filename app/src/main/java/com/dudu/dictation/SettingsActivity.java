@@ -30,23 +30,6 @@ public class SettingsActivity extends Activity {
         // 在上面的根布局上, 再次查找 Switch 的 id, 就能找到我们的 Switch 控件了
         Switch layout_switch=layout.findViewById(R.id.switch_widget);
         Button btshare = (Button) findViewById(R.id.btshare);
-        btshare.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    XTCAppExtendObject xtcAppExtendObject = new XTCAppExtendObject();
-                    xtcAppExtendObject.setStartActivity(MainActivity.class.getName());
-                    xtcAppExtendObject.setExtInfo("ExtendInfo");
-                    XTCShareMessage xtcShareMessage = new XTCShareMessage();
-                    xtcShareMessage.setShareObject(xtcAppExtendObject);
-                    xtcShareMessage.setThumbImage(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-                    xtcShareMessage.setDescription("快来安装dudu开发的听写吧");
-                    SendMessageToXTC.Request request = new SendMessageToXTC.Request();
-                    request.setMessage(xtcShareMessage);
-                    new ShareMessageManager(SettingsActivity.this).sendRequestToXTC(request, "appKey");
-
-                }
-
-            });
         
 
     }

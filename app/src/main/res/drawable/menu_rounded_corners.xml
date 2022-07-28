@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    //边框颜色处理
+    <item>
+        <shape>
+            <solid android:color="#FFFFFF" />
+            //边框圆角
+            <corners
+                android:bottomLeftRadius="10px"
+                android:bottomRightRadius="0px"
+                android:topLeftRadius="10px"
+                android:topRightRadius="0px"/>
+        </shape>
+    </item>
+</layer-list>
+
+

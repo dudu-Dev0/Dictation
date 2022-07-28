@@ -10,7 +10,7 @@ public class DirList {
      * @param file 地址
      */
     public static ArrayList<File> getPath(File file) {
-        ArrayList<File> list = new ArrayList<>();
+        ArrayList<File> list = new ArrayList<File>();
         File[] fileArray = file.listFiles();
         if (fileArray == null) {
             return null;
@@ -28,22 +28,22 @@ public class DirList {
     
     public static ArrayList<String> getName(File file) {
         
-        ArrayList<String> namelist = new ArrayList<>();
+        ArrayList<String> nameList = new ArrayList<String>();
         File[] fileArray = file.listFiles();
         System.out.println(fileArray);
         if (fileArray == null) {
             return null;
         } else {
             for (File f : fileArray) {
-                if (f.isDirectory()) {
+                if (f.isFile()) {
                     String name=f.getName();
-                    namelist.add(0,name);
+                    nameList.add(0,name);
                 } else {
                     getName(f);
                 }
             }
         }
-        return namelist;
+        return nameList;
     }
 
     

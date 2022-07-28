@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    tools:context=".SetNameActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="命名新单词本"
+        android:textColor="#2196F3"
+        android:textSize="20dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <EditText
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_shape"
+            android:ems="10"
+            android:hint="名称"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#373737"
+            android:inputType="textPersonName" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="0"
+            android:text="给你的单词本取个名字吧"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/finishSetName"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/button_circle_blue"
+        android:text="完成" />
+
+
+
+
+</LinearLayout>

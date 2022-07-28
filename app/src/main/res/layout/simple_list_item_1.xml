@@ -2,8 +2,9 @@
 <TextView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@android:id/text1"
+	android:layout_weight="1"
 	android:layout_width="match_parent"
-	android:layout_height="40dp"
+	android:layout_height="60dp"
 	android:textAppearance="?android:attr/textAppearanceListItemSmall"
 	android:gravity="center_vertical"
 	android:paddingStart="?android:attr/listPreferredItemPaddingStart"
@@ -11,6 +12,6 @@
 	android:minHeight="?android:attr/listPreferredItemHeightSmall"
 	android:background="@drawable/button_grey"
 	android:textColor="#FFFFFFFF"
-	android:textSize="10sp"
+	android:textSize="18dp"
 	android:layout_margin="5dp"/>
 
