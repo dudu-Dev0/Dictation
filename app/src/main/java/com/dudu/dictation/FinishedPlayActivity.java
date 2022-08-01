@@ -1,6 +1,7 @@
 package com.dudu.dictation;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Button;
@@ -27,6 +28,9 @@ public class FinishedPlayActivity extends Activity {
 
         List<String> wordsList= FileUtils.readFile2List(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName,"UTF-8");
         text.setText("本次听写"+wordsList.size()+"个单词");
+        SharedPreferences getSPData = getSharedPreferences("settings",MODE_PRIVATE);
+        boolean autoDel = getSPData.getBoolean("autoDel",false);
+        if(autoDel){FileUtils.deleteFile(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName);}
         backbt.setOnClickListener(v -> finish());
         sharebt.setOnClickListener(v -> Toast.makeText(FinishedPlayActivity.this,"暂无此功能",Toast.LENGTH_SHORT).show());
     }

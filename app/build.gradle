@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.dudu.dictation"
         minSdk 19
-        targetSdk 25
+        targetSdk 33
         versionCode 1
         versionName "0.1.0-Preview"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,14 +32,13 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation files('libs/YoudaoBase_v2.0.5.jar')
-    implementation files('libs/YoudaoTTS_v1.0.0.jar')
-    implementation 'com.google.android.material:material:+'
     implementation 'com.wanjian:cockroach:0.0.5'
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation 'com.google.android.material:material:1.6.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.blankj:utilcodex:1.28.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'

@@ -17,8 +17,17 @@
         android:resizeableActivity="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".SetLoopTimesActivity"
+            android:exported="false"
+            android:theme="@style/SwipeToDisDisabled"/>
+        <activity
+            android:name=".MoreOptionsActivity"
+            android:exported="false"
+            android:theme="@style/NoAnimationAndSwipeToDisDisabledTheme" />
+        <activity
             android:name=".InputWordsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SwipeToDisDisabled" />
         <activity
             android:name=".AboutActivity"
             android:exported="false" />
@@ -27,6 +36,7 @@
             android:exported="false" />
         <activity
             android:name=".HistoryActivity"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +45,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".PlayActivity" />
+        <activity
+            android:name=".PlayActivity"
+            android:theme="@style/SwipeToDisDisabled" />
         <activity android:name=".FinishedPlayActivity" />
 
         <meta-data

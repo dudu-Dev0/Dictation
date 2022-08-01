@@ -32,21 +32,32 @@ public class InputWordsActivity extends AppCompatActivity {
         numberTextOfWords.setText("单词"+n);
         inputNextWord.setOnClickListener(view -> {
             String word = wordsText.getText().toString();
-            String path = Environment.getExternalStorageDirectory() + "/dictation";
-            FileUtils.writeFileFromString(path+File.separator+name,word+"\n",true);
-            wordsText.setText("");
-            n++;
-            numberTextOfWords.setText("单词"+n);
+            if(StringUtil.isBlank(word)||SpecialSymbolsUtil.isSpecialChar(word)) {
+                Toast.makeText(InputWordsActivity.this,"请勿输入空字符或非法符号",Toast.LENGTH_SHORT);
+            }
+
+            else {
+                String path = Environment.getExternalStorageDirectory() + "/dictation";
+                FileUtils.writeFileFromString(path + File.separator + name, word + "\n", true);
+                wordsText.setText("");
+                n++;
+                numberTextOfWords.setText("单词" + n);
+            }
         });
         finishInput.setOnClickListener(view -> {
             String word = wordsText.getText().toString();
-            String path = Environment.getExternalStorageDirectory() + "/dictation";
-            FileUtils.writeFileFromString(path+File.separator+name,word,true);
-            wordsText.setText("");
-            Intent intent = new Intent(this,PlayActivity.class);
-            intent.putExtra("dataFileName",name);
-            startActivity(intent);
-            finish();
+
+            if(StringUtil.isBlank(word)||SpecialSymbolsUtil.isSpecialChar(word)) {
+                Toast.makeText(InputWordsActivity.this,"请勿输入空字符或非法符号",Toast.LENGTH_SHORT);
+            }else {
+                String path = Environment.getExternalStorageDirectory() + "/dictation";
+                FileUtils.writeFileFromString(path + File.separator + name, word, true);
+                wordsText.setText("");
+                Intent intent = new Intent(this, PlayActivity.class);
+                intent.putExtra("dataFileName", name);
+                startActivity(intent);
+                finish();
+            }
         });
 
     }

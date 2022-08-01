@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="75dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_weight="0"
@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/finishSetName"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_gravity="bottom|center"
         android:background="@drawable/button_circle_blue"
         android:text="完成" />

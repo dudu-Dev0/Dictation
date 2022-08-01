@@ -22,6 +22,9 @@ public class SetNameActivity extends AppCompatActivity {
 
         EditText nameText = (EditText) findViewById(R.id.nameText);
         Button finishSetName = (Button) findViewById(R.id.finishSetName);
+
+        ButtonUtil.addClickScale(finishSetName, 0.9f, 120);
+
         FileUtils.createOrExistsDir("/sdcard/dictation/");
         finishSetName.setOnClickListener(view -> {
             String name = nameText.getText().toString();
@@ -43,7 +46,8 @@ public class SetNameActivity extends AppCompatActivity {
                 }
             Intent intent = new Intent(SetNameActivity.this,InputWordsActivity.class);
             intent.putExtra("dataFileName",name);
-            startActivity(intent);}
+            startActivity(intent);
+            finish();}
         });
     }
 }
