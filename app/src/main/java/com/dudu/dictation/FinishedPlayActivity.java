@@ -21,7 +21,7 @@ public class FinishedPlayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finishedplay);
         Button backbt = (Button)findViewById(R.id.backbt);
-        Button sharebt = (Button)findViewById(R.id.sharebt);
+        Button answer = (Button)findViewById(R.id.answer);
         TextView text = (TextView)findViewById(R.id.text);
         Intent getData = getIntent();
         String dataFileName = getData.getStringExtra("dataFileName");
@@ -32,7 +32,12 @@ public class FinishedPlayActivity extends Activity {
         boolean autoDel = getSPData.getBoolean("autoDel",false);
         if(autoDel){FileUtils.deleteFile(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName);}
         backbt.setOnClickListener(v -> finish());
-        sharebt.setOnClickListener(v -> Toast.makeText(FinishedPlayActivity.this,"暂无此功能",Toast.LENGTH_SHORT).show());
+        answer.setOnClickListener(v ->{
+            Intent intent=new Intent(FinishedPlayActivity.this,AnswerActivity.class);
+            intent.putExtra("dataFileName",dataFileName);
+            startActivity(intent);
+            finish();
+        });
     }
     
 }

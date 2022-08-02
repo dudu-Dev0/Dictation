@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\duyua\\.keystore\\dudu.jks')
+            storePassword 'Du200849'
+            keyAlias 'dududev'
+            keyPassword 'Du200849'
+        }
+    }
     sourceSets.main.jniLibs.srcDirs = ['libs']
     compileSdk 32
     defaultConfig {
@@ -18,6 +26,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
         compileOptions {

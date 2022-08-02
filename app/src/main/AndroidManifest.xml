@@ -16,6 +16,12 @@
         android:resizeableActivity="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".AnswerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EasterEggActivity"
+            android:exported="false" />
+        <activity
             android:name=".SetBroadcastIntervalActivity"
             android:exported="false"
             android:theme="@style/SwipeToDisDisabled" />
