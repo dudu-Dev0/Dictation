@@ -3,7 +3,7 @@
     //边框颜色处理
     <item>
         <shape>
-            <solid android:color="#80757575" />
+            <solid android:color="#40757575" />
             //边框圆角
             <corners
                 android:bottomLeftRadius="15px"

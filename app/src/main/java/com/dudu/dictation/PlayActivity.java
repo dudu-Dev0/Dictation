@@ -31,6 +31,7 @@ public class PlayActivity extends Activity {
     private int soundCount;
     private int listSize;
     private List<String> wordsList;
+    private int broadcastInterval;
     TextView textofpg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class PlayActivity extends Activity {
         }
         SharedPreferences getSettings = getSharedPreferences("settings",MODE_PRIVATE);
         soundCount = getSettings.getInt("loopTimes",1);
+        broadcastInterval = getSettings.getInt("broadcastInterval",3000);
+
         boolean scrambleTheOrder = getSettings.getBoolean("scrambleTheOrder",true);
 
         wordsList= FileUtils.readFile2List(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName,"UTF-8");
@@ -140,7 +143,7 @@ public class PlayActivity extends Activity {
             mp.start();
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             public void onCompletion(MediaPlayer mp) {
-                try{Thread.sleep(2000);}catch (InterruptedException e) {}
+                try{Thread.sleep(broadcastInterval);}catch (InterruptedException e) {}
                 try
                 {
                     soundCount--;

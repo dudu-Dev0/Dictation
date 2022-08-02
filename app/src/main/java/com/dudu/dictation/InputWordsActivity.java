@@ -33,7 +33,7 @@ public class InputWordsActivity extends AppCompatActivity {
         inputNextWord.setOnClickListener(view -> {
             String word = wordsText.getText().toString();
             if(StringUtil.isBlank(word)||SpecialSymbolsUtil.isSpecialChar(word)) {
-                Toast.makeText(InputWordsActivity.this,"请勿输入空字符或非法符号",Toast.LENGTH_SHORT);
+                Toast.makeText(InputWordsActivity.this,"请勿输入特殊符号",Toast.LENGTH_SHORT);
             }
 
             else {

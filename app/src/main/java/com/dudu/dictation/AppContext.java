@@ -5,18 +5,15 @@ import android.content.Context;
 
 public class AppContext extends Application {
 
-    @SuppressLint("StaticFieldLeak")
-    private static Context instance;
+private static Context context;
 
-    @Override
+@Override
     public void onCreate() {
-        super.onCreate();
-        instance = getApplicationContext();
-    }
+    super.onCreate();
+    context = getApplicationContext();
 
-    public static Context getContext()
-    {
-        return instance;
-    }
-
+}
+public static Context getContext(){
+    return context;
+}
 }

@@ -7,18 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
-import android.view.View;
 
 import com.suke.widget.SwitchButton;
-import com.xtc.shareapi.share.shareobject.XTCAppExtendObject;
-import com.xtc.shareapi.share.shareobject.XTCShareMessage;
-import android.graphics.BitmapFactory;
-import com.xtc.shareapi.share.communication.SendMessageToXTC;
-import com.xtc.shareapi.share.manager.ShareMessageManager;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 
-import android.widget.Toast;
 
 
 public class SettingsActivity extends Activity {
@@ -31,6 +23,7 @@ public class SettingsActivity extends Activity {
         SwitchButton scrambleTheOrder = (SwitchButton) findViewById(R.id.scrambleTheOrder);
         Button btshare = findViewById(R.id.btshare);
         LinearLayout toSetLoopTimes = findViewById(R.id.toSetLoopTimes);
+        LinearLayout toSetBroadcastInterval = findViewById(R.id.toSetBroadcastInterval);
 
         SharedPreferences getSPData = getSharedPreferences("settings",MODE_PRIVATE);
         boolean settingsOfAutoDel = getSPData.getBoolean("autoDel",false);
@@ -60,18 +53,28 @@ public class SettingsActivity extends Activity {
             Intent intent = new Intent(SettingsActivity.this,SetLoopTimesActivity.class);
             startActivityForResult(intent,2);
         });
+        toSetBroadcastInterval.setOnClickListener(view -> {
+            Intent intent = new Intent(SettingsActivity.this,SetBroadcastIntervalActivity.class);
+            startActivityForResult(intent,3);
+        });
 
 
 
     }
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        SharedPreferences.Editor SPEditor = getSharedPreferences("settings",MODE_PRIVATE).edit();
         switch(requestCode){
             case 2:
                 int loopTimes = data.getIntExtra("loopTimes",1);
-                SharedPreferences.Editor SPEditor = getSharedPreferences("settings",MODE_PRIVATE).edit();
                 SPEditor.putInt("loopTimes",loopTimes);
+                SPEditor.apply();
+            case 3:
+                int broadcastInterval = data.getIntExtra("broadcastInterval",3000);
+                SPEditor.putInt("broadcastInterval",broadcastInterval);
                 SPEditor.apply();
         }
     }
+
+
 }

@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -17,9 +16,13 @@
         android:resizeableActivity="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".SetBroadcastIntervalActivity"
+            android:exported="false"
+            android:theme="@style/SwipeToDisDisabled" />
+        <activity
             android:name=".SetLoopTimesActivity"
             android:exported="false"
-            android:theme="@style/SwipeToDisDisabled"/>
+            android:theme="@style/SwipeToDisDisabled" />
         <activity
             android:name=".MoreOptionsActivity"
             android:exported="false"
@@ -48,7 +51,15 @@
         <activity
             android:name=".PlayActivity"
             android:theme="@style/SwipeToDisDisabled" />
-        <activity android:name=".FinishedPlayActivity" />
+        <activity android:name=".FinishedPlayActivity" /> <!-- 网络监听的广播接收者 -->
+        <receiver
+            android:name=".NetWorkChangeBroadcastReceiver"
+            android:exported="false"
+            android:label="NetworkConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="android.max_aspect"
@@ -58,7 +69,7 @@
             android:value="ffe439d983" /> <!-- 配置APP版本号 -->
         <meta-data
             android:name="BUGLY_APP_VERSION"
-            android:value="@string/app_version" /> <!-- 配置APP渠道号 -->
+            android:value="1.0.0-release" /> <!-- 配置APP渠道号 -->
         <meta-data
             android:name="BUGLY_APP_CHANNEL"
             android:value="1.0" /> <!-- 配置Bugly调试模式（true或者false） -->

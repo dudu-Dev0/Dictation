@@ -40,7 +40,6 @@ public class SetNameActivity extends AppCompatActivity {
                     FileWriter fw = new FileWriter(path + File.separator + name);
                     fw.write("");
                     fw.close();
-                    Toast.makeText(SetNameActivity.this, "文件写入成功", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
