@@ -2,6 +2,7 @@ package com.dudu.dictation;
 
 
 
+import android.app.Activity;
 import android.app.Application;
 
 import android.os.Handler;
@@ -26,9 +27,9 @@ public class App extends Application {
 
     public void onCreate() {
 
-        super.onCreate();
 
         // handlerException内部建议手动try{ 你的异常处理逻辑 }catch(Throwable e){ } ，以防handlerException内部再次抛出异常，导致循环调用handlerException
+        super.onCreate();
         Cockroach.install((thread, throwable) -> {
 
 //开发时使用Cockroach可能不容易发现bug，所以建议开发阶段在handlerException中用Toast谈个提示框，
@@ -45,9 +46,9 @@ public class App extends Application {
 
 //建议使用下面方式在控制台打印异常，这样就可以在Error级别看到红色log
 
-                    Log.e("AndroidRuntime","--->CockroachException:"+thread);
+                    Log.e("AndroidRuntime", "--->CockroachException:" + thread);
 
-                            Toast.makeText(App.this, "Exception Happend\n" + thread + "\n" + throwable.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(App.this, "Exception Happend\n" + thread + "\n" + throwable.toString(), Toast.LENGTH_SHORT).show();
 
 // throw new RuntimeException("..."+(i++));
 

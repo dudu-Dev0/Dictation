@@ -26,11 +26,11 @@ public class FinishedPlayActivity extends Activity {
         Intent getData = getIntent();
         String dataFileName = getData.getStringExtra("dataFileName");
 
-        List<String> wordsList= FileUtils.readFile2List(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName,"UTF-8");
+        List<String> wordsList= FileUtils.readFile2List(this.getExternalFilesDir("dictation")+File.separator+dataFileName,"UTF-8");
         text.setText("本次听写"+wordsList.size()+"个单词");
         SharedPreferences getSPData = getSharedPreferences("settings",MODE_PRIVATE);
         boolean autoDel = getSPData.getBoolean("autoDel",false);
-        if(autoDel){FileUtils.deleteFile(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName);}
+        if(autoDel){FileUtils.deleteFile(this.getExternalFilesDir("dictation")+ File.separator+dataFileName);}
         backbt.setOnClickListener(v -> finish());
         answer.setOnClickListener(v ->{
             Intent intent=new Intent(FinishedPlayActivity.this,AnswerActivity.class);

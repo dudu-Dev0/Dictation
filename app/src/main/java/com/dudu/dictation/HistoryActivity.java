@@ -11,6 +11,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.tencent.bugly.crashreport.CrashReport;
+import com.wanjian.cockroach.Cockroach;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,6 +53,35 @@ public class HistoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        Cockroach.install((thread, throwable) -> {
+
+//开发时使用Cockroach可能不容易发现bug，所以建议开发阶段在handlerException中用Toast谈个提示框，
+
+//由于handlerException可能运行在非ui线程中，Toast又需要在主线程，所以new了一个new Handler(Looper.getMainLooper())，
+
+//所以千万不要在下面的run方法中执行耗时操作，因为run已经运行在了ui线程中。
+
+//new Handler(Looper.getMainLooper())只是为了能弹出个toast，并无其他用途
+
+            new Handler(Looper.getMainLooper()).post(() -> {
+
+                try {
+
+//建议使用下面方式在控制台打印异常，这样就可以在Error级别看到红色log
+
+                    Log.e("AndroidRuntime", "--->CockroachException:" + thread);
+
+                    Toast.makeText(HistoryActivity.this, "Exception Happend\n" + thread + "\n" + throwable.toString(), Toast.LENGTH_SHORT).show();
+
+// throw new RuntimeException("..."+(i++));
+
+                } catch (Throwable e) {
+
+                }
+
+            });
+
+        });
         boolean isPermissionAllGranted = checkPermissionAllGranted(permissions);
         connected = NetWorkChangeBroadcastReceiver.isNetConnected(this);
         if(connected){
@@ -103,7 +135,7 @@ public class HistoryActivity extends Activity {
             startActivity(intent);
         });
 
-        fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+        fileList = DirList.getName(new File(this.getExternalFilesDir("dictation").getPath()));
 
        if(isPermissionAllGranted){
     if(fileList!=null) {
@@ -123,7 +155,7 @@ public class HistoryActivity extends Activity {
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+                fileList = DirList.getName(new File(HistoryActivity.this.getExternalFilesDir("dictation").getPath()));
                 if(fileList.size()==0) {
                     list.setBackgroundResource(R.drawable.list_back);
                 }else{
@@ -149,10 +181,10 @@ public class HistoryActivity extends Activity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK){
-                    boolean isDeleted = FileUtils.deleteFile(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+data.getStringExtra("dataFileName"));
+                    boolean isDeleted = FileUtils.deleteFile(this.getExternalFilesDir("dictation")+ File.separator+data.getStringExtra("dataFileName"));
                     if(isDeleted){Toast.makeText(HistoryActivity.this,data.getStringExtra("data_return"),Toast.LENGTH_SHORT).show();}
                     else{Toast.makeText(HistoryActivity.this,"删除失败",Toast.LENGTH_SHORT).show();}
-                    ArrayList<String> fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+                    ArrayList<String> fileList = DirList.getName(new File(this.getExternalFilesDir("dictation").getPath()));
                     if(fileList.size()==0) {
                         list.setBackgroundResource(R.drawable.list_back);
                     }else{
@@ -229,7 +261,7 @@ public class HistoryActivity extends Activity {
         }
 
     private void initList(){
-        fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+        fileList = DirList.getName(new File(this.getExternalFilesDir("dictation").getPath()));
         adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1, fileList);
         list.setAdapter(adapter);
         if(fileList!=null) {

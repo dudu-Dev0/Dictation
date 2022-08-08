@@ -21,7 +21,7 @@ public class AnswerActivity extends AppCompatActivity {
         Intent getFileName = getIntent();
         dataFileName = getFileName.getStringExtra("dataFileName");
 
-        String answers = FileUtils.readFile2String(Environment.getExternalStorageDirectory() + "/dictation"+ File.separator+dataFileName,"UTF-8");
+        String answers = FileUtils.readFile2String(this.getExternalFilesDir("dictation")+ File.separator+dataFileName,"UTF-8");
         answerText.setText(answers);
     }
 }

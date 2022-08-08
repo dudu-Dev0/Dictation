@@ -61,7 +61,7 @@ public class PlayActivity extends Activity {
 
         boolean scrambleTheOrder = getSettings.getBoolean("scrambleTheOrder",true);
 
-        wordsList= FileUtils.readFile2List(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+dataFileName,"UTF-8");
+        wordsList= FileUtils.readFile2List(this.getExternalFilesDir("dictation")+ File.separator+dataFileName,"UTF-8");
         if(scrambleTheOrder==true){
             Collections.shuffle(wordsList);
         }

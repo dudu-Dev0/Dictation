@@ -25,12 +25,11 @@ public class SetNameActivity extends AppCompatActivity {
 
         ButtonUtil.addClickScale(finishSetName, 0.9f, 120);
 
-        FileUtils.createOrExistsDir("/sdcard/dictation/");
         finishSetName.setOnClickListener(view -> {
             String name = nameText.getText().toString();
-            if(FileUtils.isFileExists("/sdcard/dictation/"+name)){
+            if(FileUtils.isFileExists(this.getExternalFilesDir("dictation")+ File.separator+name)){
                 Toast.makeText(this,"请不要重复使用同一个名字",Toast.LENGTH_SHORT).show();
-            }else{String path = Environment.getExternalStorageDirectory() + "/dictation";
+            }else{String path = this.getExternalFilesDir("dictation").getPath();
                 Log.e("------path", path);
                 File files = new File(path);
                 if (!files.exists()) {

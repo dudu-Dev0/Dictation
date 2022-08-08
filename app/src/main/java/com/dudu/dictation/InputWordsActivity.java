@@ -37,7 +37,7 @@ public class InputWordsActivity extends AppCompatActivity {
             }
 
             else {
-                String path = Environment.getExternalStorageDirectory() + "/dictation";
+                String path = this.getExternalFilesDir("dictation").getPath();
                 FileUtils.writeFileFromString(path + File.separator + name, word + "\n", true);
                 wordsText.setText("");
                 n++;
@@ -50,7 +50,7 @@ public class InputWordsActivity extends AppCompatActivity {
             if(StringUtil.isBlank(word)||SpecialSymbolsUtil.isSpecialChar(word)) {
                 Toast.makeText(InputWordsActivity.this,"请勿输入空字符或非法符号",Toast.LENGTH_SHORT);
             }else {
-                String path = Environment.getExternalStorageDirectory() + "/dictation";
+                String path = this.getExternalFilesDir("dictation").getPath();
                 FileUtils.writeFileFromString(path + File.separator + name, word, true);
                 wordsText.setText("");
                 Intent intent = new Intent(this, PlayActivity.class);
