@@ -52,6 +52,13 @@
             android:layout_height="75dp"
             android:background="@drawable/developer"
             android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/shareApp"
+            android:layout_gravity="center"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_circle_blue"
+            android:text="分享软件"/>
     </LinearLayout>
 
     </ScrollView>

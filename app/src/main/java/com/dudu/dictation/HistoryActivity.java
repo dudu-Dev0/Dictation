@@ -37,20 +37,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class HistoryActivity extends Activity {
-    private ArrayList<String> fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+    private ArrayList<String> fileList;// = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
     boolean connected;
     private ListView list;
     ArrayAdapter<String> adapter;
     private String[] permissions = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE
             ,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private int PERMISSIONS_REQUEST_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-
-        requestPermission();
+        boolean isPermissionAllGranted = checkPermissionAllGranted(permissions);
         connected = NetWorkChangeBroadcastReceiver.isNetConnected(this);
         if(connected){
             // 网络正常,做你想做的操作
@@ -103,89 +103,33 @@ public class HistoryActivity extends Activity {
             startActivity(intent);
         });
 
+        fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
 
-       if(checkPermissionAllGranted(permissions)){
-            adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1, fileList);
-            list.setAdapter(adapter);
-           if(fileList.size()==0) {
-               list.setBackgroundResource(R.drawable.list_back);
-           }else{
-               list.setBackground(null);
-           }}
-       else{
-           Toast.makeText(HistoryActivity.this, "请授予权限", Toast.LENGTH_SHORT).show();
+       if(isPermissionAllGranted){
+    if(fileList!=null) {
+        if (fileList.size() == 0) {
+            list.setBackgroundResource(R.drawable.list_back);
+        } else {
+            list.setBackground(null);
+        }
+        initList();
+    }
        }
+       ActivityCompat.requestPermissions(HistoryActivity.this,permissions,PERMISSIONS_REQUEST_CODE);
 
         refresh.setProgressViewOffset(true,30,180);
         refresh.setDistanceToTriggerSync(40);
         refresh.setColorSchemeColors(Color.parseColor("#2196F3"),Color.GREEN);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (NoDoubleClick.isNotFastClick()) {
-                    if (connected) {
-                        String fileName = fileList.get(i);
-                        Intent intent = new Intent(HistoryActivity.this, PlayActivity.class);
-                        intent.putExtra("dataFileName", fileName);
-                        startActivity(intent);
-                    } else {
-                        MyToast();
-                    }
-                }
-            }
-        });
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String fileName = fileList.get(i);
-                Intent intent = new Intent();
-                intent.setClass(HistoryActivity.this,MoreOptionsActivity.class);
-                intent.putExtra("dataFileName",fileName);
-                startActivityForResult(intent,1);
-                overridePendingTransition(0,0);
-                return true;
-            }
-        });
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ArrayList<String> fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+                fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
                 if(fileList.size()==0) {
                     list.setBackgroundResource(R.drawable.list_back);
                 }else{
                     list.setBackground(null);
                 }
-                adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1,fileList);
-                adapter.notifyDataSetChanged();
-                list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        if(NoDoubleClick.isNotFastClick()){
-                        if(connected) {
-                            String fileName = fileList.get(i);
-                            Intent intent = new Intent(HistoryActivity.this, PlayActivity.class);
-                            intent.putExtra("dataFileName", fileName);
-                            startActivity(intent);
-                        }else{
-                            MyToast();
-                        }
-                        }
-                    }
-                });
-                list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String fileName = fileList.get(i);
-                        Intent intent = new Intent();
-                        intent.setClass(HistoryActivity.this,MoreOptionsActivity.class);
-                        intent.putExtra("dataFileName",fileName);
-                        startActivityForResult(intent,1);
-                        overridePendingTransition(0,0);
-                        return true;
-                    }
-                });
-
+                initList();
                 refresh.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -205,7 +149,6 @@ public class HistoryActivity extends Activity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK){
-                    ListView list = (ListView) findViewById(R.id.historylist);
                     boolean isDeleted = FileUtils.deleteFile(Environment.getExternalStorageDirectory() + "/dictation"+File.separator+data.getStringExtra("dataFileName"));
                     if(isDeleted){Toast.makeText(HistoryActivity.this,data.getStringExtra("data_return"),Toast.LENGTH_SHORT).show();}
                     else{Toast.makeText(HistoryActivity.this,"删除失败",Toast.LENGTH_SHORT).show();}
@@ -215,35 +158,8 @@ public class HistoryActivity extends Activity {
                     }else{
                         list.setBackground(null);
                     }
-                    adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1,fileList);
-                    adapter.notifyDataSetChanged();
-                    list.setAdapter(adapter);
-                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            if(NoDoubleClick.isNotFastClick()) {
-                                if (connected) {
-                                    String fileName = fileList.get(i);
-                                    Intent intent = new Intent(HistoryActivity.this, PlayActivity.class);
-                                    intent.putExtra("dataFileName", fileName);
-                                    startActivity(intent);
-                                } else {
-                                    MyToast();
-                                }
-                            }
-                        }
-                    });
-                    list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                        @Override
-                        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            String fileName = fileList.get(i);
-                            Intent intent = new Intent(HistoryActivity.this,MoreOptionsActivity.class);
-                            intent.putExtra("dataFileName",fileName);
-                            startActivityForResult(intent,1);
-                            overridePendingTransition(0,0);
-                            return true;
-                        }
-                    });}
+                    initList();
+                }
                 if (resultCode == RESULT_CANCELED){
                     Toast.makeText(HistoryActivity.this,data.getStringExtra("data_return"),Toast.LENGTH_SHORT).show();
                 }
@@ -268,20 +184,7 @@ public class HistoryActivity extends Activity {
         toast.show();
         //说明当前无网络连接
     }
-    private void requestPermission() {
-        if (ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
-            System.out.println("用户没用此权限");
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                System.out.println("用户申请过权限，但是被拒绝了（不是彻底决绝）");
-                ActivityCompat.requestPermissions(this,permissions,100);
 
-            } else {
-                System.out.println("申请过权限，但是被用户彻底决绝了或是手机不允许有此权限（依然可以在此再申请权限）");
-                ActivityCompat.requestPermissions(this,permissions,100);
-
-            }
-        }
-    }
     /**
      * 检查是否获取所有权限
      */
@@ -299,33 +202,71 @@ public class HistoryActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 100: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    System.out.println("用户授予了权限");
-                    // 执行相应的操作：
-                    fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
-                    int listSize=fileList.size();
-                    adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1,fileList);
-                    list.setAdapter(adapter);
-                    if(fileList.size()==0) {
-                        list.setBackgroundResource(R.drawable.list_back);
-                    }else{
-                        list.setBackground(null);
+                boolean isAllGranted = true;
+
+                for(int grant:grantResults) {
+                    if (grant != PackageManager.PERMISSION_GRANTED) {
+                        isAllGranted = false;
+                        break;
                     }
-                } else {
-                    System.out.println("用户没有给予权限");
-                    Toast.makeText(HistoryActivity.this, "请授予权限,应用将在三秒后退出", Toast.LENGTH_LONG).show();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    finish();
                 }
-                return;
+                if(isAllGranted){
+                    if(fileList!=null) {
+                        if (fileList.size() == 0) {
+                            list.setBackgroundResource(R.drawable.list_back);
+                        } else {
+                            list.setBackground(null);
+                        }
+                        initList();
+                    }
+                }else{
+                    Toast.makeText(HistoryActivity.this, "需要授予全部权限才能正常使用", Toast.LENGTH_SHORT).show();
+                }
+
+                }
+
             }
         }
+
+    private void initList(){
+        fileList = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+        adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1, fileList);
+        list.setAdapter(adapter);
+        if(fileList!=null) {
+            if (fileList.size() == 0) {
+                list.setBackgroundResource(R.drawable.list_back);
+            } else {
+                list.setBackground(null);
+            }
+        }
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(NoDoubleClick.isNotFastClick()) {
+                    if (connected) {
+                        String fileName = fileList.get(i);
+                        Intent intent = new Intent(HistoryActivity.this, PlayActivity.class);
+                        intent.putExtra("dataFileName", fileName);
+                        startActivity(intent);
+                    } else {
+                        MyToast();
+                    }
+                }
+            }
+        });
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String fileName = fileList.get(i);
+                Intent intent = new Intent(HistoryActivity.this,MoreOptionsActivity.class);
+                intent.putExtra("dataFileName",fileName);
+                startActivityForResult(intent,1);
+                overridePendingTransition(0,0);
+                return true;
+            }
+        });
     }
+
     }
 
 

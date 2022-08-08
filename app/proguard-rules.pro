@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+-dontwarn com.blankj.**
+-keep public class com.blankj.**{*;}
+-keep class  com.xtc.shareapi.**{*;}
