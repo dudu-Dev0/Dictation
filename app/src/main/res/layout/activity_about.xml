@@ -48,6 +48,10 @@
             android:text="软件有小彩蛋哦"
             android:textSize="7dp"/>
         <ImageView
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:background="@drawable/group"/>
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:background="@drawable/developer"
