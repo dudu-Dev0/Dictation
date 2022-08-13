@@ -15,6 +15,7 @@ public class MoreOptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_more_options);
         Intent getDataFileName = getIntent();
         String dataFileName = getDataFileName.getStringExtra("dataFileName");
+        int imageId = getDataFileName.getIntExtra("imageId",1145141918);
         ImageButton delete = (ImageButton) findViewById(R.id.delete);
         ImageButton cancel = (ImageButton) findViewById(R.id.cancel);
 
@@ -38,6 +39,7 @@ public class MoreOptionsActivity extends AppCompatActivity {
         delete.setOnClickListener(view -> {
             Intent intent= new Intent();
             intent.putExtra("dataFileName",dataFileName);
+            intent.putExtra("imageId",imageId);
             intent.putExtra("data_return","删除成功");
             setResult(RESULT_OK,intent);
             finish();

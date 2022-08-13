@@ -5,7 +5,7 @@
     android:layout_height="100dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/button_grey">
+    android:background="@drawable/toast_background">
 
 
     <ImageView

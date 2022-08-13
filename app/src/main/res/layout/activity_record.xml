@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    tools:context=".RecordActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="语音录入"
+        android:textSize="20dp"
+        android:textColor="#2196F3"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第n个"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:id="@+id/howManyRecordedText"
+            android:layout_gravity="top|center_horizontal"/>
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="top|center">
+
+            <com.dudu.dictation.CircleProgressView
+                android:id="@+id/progress"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center"
+                app:backWidth="10dp"
+                app:progColor="#20AEFF"
+                app:backColor="#E6DBDBDB"
+                app:progWidth="10dp"
+                />
+            <ImageButton
+                android:id="@+id/startRecord"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:background="@drawable/stop"/>
+
+            <ImageButton
+                android:id="@+id/stopRecord"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:background="@drawable/start"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/recordNextWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_left_grey"
+        android:text="下一个" />
+
+    <Button
+        android:id="@+id/finishRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_right_blue"
+        android:text="完成录入"/>
+
+    </LinearLayout>
+</LinearLayout>

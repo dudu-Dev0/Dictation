@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Environment;
 import android.os.Handler;
@@ -40,20 +41,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class HistoryActivity extends Activity {
-    private ArrayList<String> fileList;// = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
+    private ArrayList<Dictation> fileList;// = DirList.getName(new File(Environment.getExternalStorageDirectory() + "/dictation"));
     boolean connected;
     private ListView list;
-    ArrayAdapter<String> adapter;
+    DictationAdapter adapter;
     private String[] permissions = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE
-            ,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            ,Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ,Manifest.permission.RECORD_AUDIO};
     private int PERMISSIONS_REQUEST_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        Cockroach.install((thread, throwable) -> {
+      Cockroach.install((thread, throwable) -> {
 
 //开发时使用Cockroach可能不容易发现bug，所以建议开发阶段在handlerException中用Toast谈个提示框，
 
@@ -97,7 +99,7 @@ public class HistoryActivity extends Activity {
             ImageView ivToast=view.findViewById(R.id.iv_toast);
             TextView tvToast=view.findViewById(R.id.tv_toast);
             ivToast.setImageResource(R.drawable.warn);
-            tvToast.setText("无网络");
+            tvToast.setText("无网络\n请检查您的网络连接");
 
             toast.setView(view);
             toast.setDuration(Toast.LENGTH_SHORT);
@@ -123,7 +125,7 @@ public class HistoryActivity extends Activity {
 
         btMenu.setOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.END));    //为每个按钮重写OnClick方法
         toInputWords.setOnClickListener(view -> {
-            Intent intent = new Intent(HistoryActivity.this, SetNameActivity.class);
+            Intent intent = new Intent(HistoryActivity.this, ChooseWaysToInputActivity.class);
             startActivity(intent);
         });
         toSettings.setOnClickListener(view -> {
@@ -181,10 +183,13 @@ public class HistoryActivity extends Activity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK){
-                    boolean isDeleted = FileUtils.deleteFile(this.getExternalFilesDir("dictation")+ File.separator+data.getStringExtra("dataFileName"));
+                    boolean isDeleted = false;
+                    int imageId = data.getIntExtra("imageId",1145141919);
+                    if (imageId==R.drawable.text) {isDeleted = FileUtils.deleteFile(this.getExternalFilesDir("dictation")+ File.separator+data.getStringExtra("dataFileName"));}
+                    if (imageId==R.drawable.recorded){isDeleted = FileUtils.deleteDir(this.getExternalFilesDir("dictation")+ File.separator+data.getStringExtra("dataFileName"));}
                     if(isDeleted){Toast.makeText(HistoryActivity.this,data.getStringExtra("data_return"),Toast.LENGTH_SHORT).show();}
                     else{Toast.makeText(HistoryActivity.this,"删除失败",Toast.LENGTH_SHORT).show();}
-                    ArrayList<String> fileList = DirList.getName(new File(this.getExternalFilesDir("dictation").getPath()));
+                    fileList = DirList.getName(new File(this.getExternalFilesDir("dictation").getPath()));
                     if(fileList.size()==0) {
                         list.setBackgroundResource(R.drawable.list_back);
                     }else{
@@ -262,7 +267,7 @@ public class HistoryActivity extends Activity {
 
     private void initList(){
         fileList = DirList.getName(new File(this.getExternalFilesDir("dictation").getPath()));
-        adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.simple_list_item_1, fileList);
+        adapter = new DictationAdapter(HistoryActivity.this, R.layout.simple_list_item_1, fileList);
         list.setAdapter(adapter);
         if(fileList!=null) {
             if (fileList.size() == 0) {
@@ -275,13 +280,24 @@ public class HistoryActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(NoDoubleClick.isNotFastClick()) {
-                    if (connected) {
-                        String fileName = fileList.get(i);
-                        Intent intent = new Intent(HistoryActivity.this, PlayActivity.class);
-                        intent.putExtra("dataFileName", fileName);
+                    Dictation dictation = fileList.get(i);
+                    String fileName = dictation.getName();
+                    int imageId = dictation.getImageId();
+                    Intent intent = new Intent(HistoryActivity.this, PlayActivity.class);
+                    if (imageId==R.drawable.text) {
+                        if (connected) {
+                                intent.putExtra("wayType", "text");
+                                intent.putExtra("dataFileName", fileName);
+                            startActivity(intent);
+                        } else {
+                            MyToast();
+                        }
+
+                    }
+                    if (imageId == R.drawable.recorded) {
+                        intent.putExtra("wayType", "record");
+                        intent.putExtra("dataDirName", HistoryActivity.this.getExternalFilesDir("dictation").getPath() + File.separator + fileName);
                         startActivity(intent);
-                    } else {
-                        MyToast();
                     }
                 }
             }
@@ -289,9 +305,12 @@ public class HistoryActivity extends Activity {
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String fileName = fileList.get(i);
+                Dictation dictation = fileList.get(i);
+                String fileName = dictation.getName();
+                int imageId = dictation.getImageId();
                 Intent intent = new Intent(HistoryActivity.this,MoreOptionsActivity.class);
                 intent.putExtra("dataFileName",fileName);
+                intent.putExtra("imageId",imageId);
                 startActivityForResult(intent,1);
                 overridePendingTransition(0,0);
                 return true;

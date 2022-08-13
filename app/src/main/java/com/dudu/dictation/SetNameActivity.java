@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Objects;
 
 public class SetNameActivity extends AppCompatActivity {
 
@@ -19,6 +20,9 @@ public class SetNameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_name);
+
+        Intent getType = getIntent();
+        String wayType = getType.getStringExtra("wayType");
 
         EditText nameText = (EditText) findViewById(R.id.nameText);
         Button finishSetName = (Button) findViewById(R.id.finishSetName);
@@ -35,17 +39,29 @@ public class SetNameActivity extends AppCompatActivity {
                 if (!files.exists()) {
                     files.mkdirs();
                 }
-                try {
-                    FileWriter fw = new FileWriter(path + File.separator + name);
-                    fw.write("");
-                    fw.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(Objects.equals(wayType, "input")) {
+                    try {
+                        FileWriter fw = new FileWriter(path + File.separator + name);
+                        fw.write("");
+                        fw.close();
+                        Intent intent = new Intent(SetNameActivity.this,InputWordsActivity.class);
+                        intent.putExtra("dataFileName",name);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }if(Objects.equals(wayType, "record")){
+                    boolean isCreated = FileUtils.createOrExistsDir(path + File.separator + name);
+                    if(!isCreated){
+                        Toast.makeText(SetNameActivity.this, "创建失败", Toast.LENGTH_SHORT).show();
+                    }
+                    Intent intent = new Intent(SetNameActivity.this,RecordActivity.class);
+                    intent.putExtra("dataDirName",name);
+                    startActivity(intent);
+                    finish();
                 }
-            Intent intent = new Intent(SetNameActivity.this,InputWordsActivity.class);
-            intent.putExtra("dataFileName",name);
-            startActivity(intent);
-            finish();}
+            }
         });
     }
 }

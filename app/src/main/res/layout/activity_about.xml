@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="听写Ver1.0.0-release"
+            android:text="听写Ver1.2.0-release"
             android:textColor="#FFFFFF"
             android:textSize="16dp"/>
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
-            android:text="此软件献给自觉学习的同学们ヾ(≧▽≦*)o\n本软件使用有语音合成API\n部分图标来自Icon Font\n如有侵权请联系删除\n邮箱duyuao200849@163.com"/>
+            android:text="本软件使用有道语音合成API\n部分图标来自Icon Font\n如有侵权请联系删除\n邮箱duyuao200849@163.com"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,8 +52,8 @@
             android:layout_height="170dp"
             android:background="@drawable/group"/>
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_width="160dp"
+            android:layout_height="70dp"
             android:background="@drawable/developer"
             android:layout_gravity="center"/>
         <Button

@@ -55,6 +55,7 @@ public class InputWordsActivity extends AppCompatActivity {
                 wordsText.setText("");
                 Intent intent = new Intent(this, PlayActivity.class);
                 intent.putExtra("dataFileName", name);
+                intent.putExtra("wayType","text");
                 startActivity(intent);
                 finish();
             }
