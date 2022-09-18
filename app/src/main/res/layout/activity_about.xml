@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical">
 
     <TextView
@@ -32,18 +31,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="听写Ver1.2.0-release"
-            android:textColor="#FFFFFF"
             android:textSize="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
             android:text="本软件使用有道语音合成API\n部分图标来自Icon Font\n如有侵权请联系删除\n邮箱duyuao200849@163.com"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
             android:layout_gravity="right"
             android:text="软件有小彩蛋哦"
             android:textSize="7dp"/>
@@ -61,7 +57,6 @@
             android:layout_gravity="center"
             android:layout_width="160dp"
             android:layout_height="40dp"
-            android:background="@drawable/button_circle_blue"
             android:text="分享软件"/>
     </LinearLayout>
 

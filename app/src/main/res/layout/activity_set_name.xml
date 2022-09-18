@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical"
     tools:context=".SetNameActivity">
 
@@ -44,7 +43,6 @@
             android:gravity="center"
             android:layout_weight="0"
             android:text="给你的单词本取个名字吧"
-            android:textColor="#FFFFFF"
             android:textSize="15dp" />
 
     </LinearLayout>
@@ -54,6 +52,7 @@
         android:id="@+id/finishSetName"
         android:layout_width="100dp"
         android:layout_height="35dp"
+        android:textSize="12dp"
         android:layout_gravity="bottom|center"
         android:background="@drawable/button_circle_blue"
         android:text="完成" />

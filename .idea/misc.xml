@@ -30,8 +30,8 @@
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_answer.xml" value="0.7666666666666667" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_choose_ways_to_input.xml" value="0.67" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_easter_egg.xml" value="0.5166666666666667" />
-        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_finishedplay.xml" value="0.1" />
-        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_history.xml" value="0.5065104166666666" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_finishedplay.xml" value="0.67" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_history.xml" value="0.33" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_input_words.xml" value="0.5" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_main.xml" value="0.5065104166666666" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_more_options.xml" value="0.67" />
@@ -41,13 +41,13 @@
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_set_broadcast_interval.xml" value="1.211111111111111" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_set_loop_times.xml" value="0.5" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_set_name.xml" value="0.5677083333333334" />
-        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_settings.xml" value="0.7291666666666666" />
-        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/my_toast.xml" value="0.1" />
-        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/simple_list_item_1.xml" value="0.67" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/activity_settings.xml" value="0.5495978552278821" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/my_toast.xml" value="0.33" />
+        <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/simple_list_item_1.xml" value="0.1" />
         <entry key="..\:/Users/duyua/AndroidStudioProjects/Dictation/app/src/main/res/layout/simple_list_item_single_choice.xml" value="0.5677083333333334" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="16" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 33 Platform" project-jdk-type="Android SDK" />
 </project>

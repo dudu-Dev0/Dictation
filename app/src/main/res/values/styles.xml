@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppTheme" parent="@android:style/Theme.NoTitleBar"></style>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+    </style>
 
-	<style name="SwipeToDisDisabled" parent="@style/Theme.AppCompat.NoActionBar">
+	<style name="SwipeToDisDisabled" parent="AppTheme">
         <item name="android:windowSwipeToDismiss" tools:ignore="NewApi">false</item>
     </style>
-    <style name="NoAnimationTheme" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="NoAnimationTheme" parent="AppTheme">
         <item name="android:windowAnimationStyle">@style/Animation</item>
     </style>
-    <style name="NoAnimationAndSwipeToDisDisabledTheme" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="NoAnimationAndSwipeToDisDisabledTheme" parent="AppTheme">
         <item name="android:windowAnimationStyle">@style/Animation</item>
         <item name="android:windowSwipeToDismiss" tools:ignore="NewApi">false</item>
     </style>

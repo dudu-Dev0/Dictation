@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical"
     tools:context=".RecordActivity">
     <TextView
@@ -24,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第n个"
-            android:textColor="#FFFFFFFF"
             android:textSize="16dp"
             android:gravity="center"
             android:id="@+id/howManyRecordedText"
@@ -75,8 +73,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:textSize="11dp"
         android:layout_weight="1"
-        android:background="@drawable/button_left_grey"
+
         android:text="下一个" />
 
     <Button
@@ -85,8 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:layout_weight="1"
-        android:background="@drawable/button_right_blue"
-        android:text="完成录入"/>
+        android:textSize="11dp"
+        android:text="完成"/>
 
     </LinearLayout>
 </LinearLayout>

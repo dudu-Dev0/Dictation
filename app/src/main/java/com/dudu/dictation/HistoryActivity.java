@@ -55,7 +55,7 @@ public class HistoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-      Cockroach.install((thread, throwable) -> {
+      /*Cockroach.install((thread, throwable) -> {
 
 //开发时使用Cockroach可能不容易发现bug，所以建议开发阶段在handlerException中用Toast谈个提示框，
 
@@ -84,6 +84,8 @@ public class HistoryActivity extends Activity {
             });
 
         });
+        */
+
         boolean isPermissionAllGranted = checkPermissionAllGranted(permissions);
         connected = NetWorkChangeBroadcastReceiver.isNetConnected(this);
         if(connected){

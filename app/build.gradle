@@ -12,11 +12,11 @@ android {
         }
     }
     sourceSets.main.jniLibs.srcDirs = ['libs']
-    compileSdk 32
+    compileSdk 33
     defaultConfig {
         applicationId "com.dudu.dictation"
-        minSdk 19
-        targetSdk 33
+        minSdk 21
+        targetSdk 32
         versionCode 2
         versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -53,6 +53,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.compose.material3:material3:1.0.0-beta01'
     implementation 'com.blankj:utilcodex:1.28.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
