@@ -1,7 +1,9 @@
 package com.dudu.dictation;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Button;
 
 import android.view.View;
@@ -19,26 +21,22 @@ public class FinishedPlayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finishedplay);
         Button backbt = (Button)findViewById(R.id.backbt);
-        Button sharebt = (Button)findViewById(R.id.sharebt);
+        Button answer = (Button)findViewById(R.id.answer);
         TextView text = (TextView)findViewById(R.id.text);
         Intent getData = getIntent();
-        String dirString = getData.getStringExtra("dir");
-        File dir = new File(dirString);
-        
-        List<File> filelist = FileList.getFile(dir);
-        text.setText("本次听写"+filelist.size()+"个单词");
-        backbt.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                finish();
-            }
-        });
-        sharebt.setOnClickListener(new View.OnClickListener(){ 
-            @Override
-            public void onClick(View v){
-                Toast.makeText(FinishedPlayActivity.this,"暂无此功能",Toast.LENGTH_SHORT).show();
-            
-            }
+        String dataFileName = getData.getStringExtra("dataFileName");
+
+        List<String> wordsList= FileUtils.readFile2List(this.getExternalFilesDir("dictation")+File.separator+dataFileName,"UTF-8");
+        text.setText("本次听写"+wordsList.size()+"个单词");
+        SharedPreferences getSPData = getSharedPreferences("settings",MODE_PRIVATE);
+        boolean autoDel = getSPData.getBoolean("autoDel",false);
+        if(autoDel){FileUtils.deleteFile(this.getExternalFilesDir("dictation")+ File.separator+dataFileName);}
+        backbt.setOnClickListener(v -> finish());
+        answer.setOnClickListener(v ->{
+            Intent intent=new Intent(FinishedPlayActivity.this,AnswerActivity.class);
+            intent.putExtra("dataFileName",dataFileName);
+            startActivity(intent);
+            finish();
         });
     }
     

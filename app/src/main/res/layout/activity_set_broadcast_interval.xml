@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RadioGroup
+        android:id="@+id/broadcastIntervalRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/set2000ms"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:button="@drawable/radiobutton_drawable"
+            android:text="2000ms"
+            android:textSize="18dp" />
+
+        <RadioButton
+            android:id="@+id/set3000ms"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:button="@drawable/radiobutton_drawable"
+            android:text="3000ms"
+            android:textSize="18dp" />
+
+        <RadioButton
+            android:id="@+id/set4000ms"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:button="@drawable/radiobutton_drawable"
+            android:text="4000ms"
+            android:textSize="18dp" />
+        <RadioButton
+            android:id="@+id/set5000ms"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:button="@drawable/radiobutton_drawable"
+            android:text="5000ms"
+            android:textSize="18dp" />
+    </RadioGroup>
+</LinearLayout>

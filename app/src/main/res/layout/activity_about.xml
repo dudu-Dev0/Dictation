@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="#2196F3"
+        android:text="关于"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/easter_egg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_launcher"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="听写Ver1.0.0-release"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="此软件献给自觉学习的同学们ヾ(≧▽≦*)o\n本软件使用有语音合成API\n部分图标来自Icon Font\n如有侵权请联系删除\n邮箱duyuao200849@163.com"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="right"
+            android:text="软件有小彩蛋哦"
+            android:textSize="7dp"/>
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:background="@drawable/group"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/developer"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/shareApp"
+            android:layout_gravity="center"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_circle_blue"
+            android:text="分享软件"/>
+    </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

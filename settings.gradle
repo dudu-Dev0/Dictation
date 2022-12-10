@@ -2,14 +2,20 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
-        mavenCentral()
+
+
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url 'https://jitpack.io' }
         google()
+        jcenter()
         mavenCentral()
+        maven { url "https://dl.bintray.com/nuptboyzhb/maven"}
+
+
     }
 }
 rootProject.name = "听写"

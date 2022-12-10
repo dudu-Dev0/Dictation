@@ -4,13 +4,14 @@
 	android:orientation="vertical"
 	android:layout_width="160dp"
 	android:layout_height="180dp"
-	android:background="#FF000000">
+	android:background="#FF000000"
+	android:keepScreenOn="true">
 
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="听写"
-		android:textSize="16sp"
+		android:textSize="20dp"
 		android:textColor="#2196F3"/>
 
 	<LinearLayout
@@ -24,41 +25,37 @@
 			android:layout_height="wrap_content"
 			android:text="*/*"
 			android:textColor="#FFFFFFFF"
-			android:textSize="14sp"
+			android:textSize="16dp"
 			android:gravity="center"
 			android:id="@+id/textofpg"
 			android:layout_gravity="top|center_horizontal"/>
 
 		<FrameLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
 			android:layout_gravity="top|center">
 
-			<ImageView
-				android:src="@drawable/stop"
-				android:layout_width="wrap_content"
-				android:layout_height="70dp"/>
 
-			<ImageView
-				android:src="@drawable/start"
-				android:layout_width="wrap_content"
-				android:layout_height="70dp"
-				android:layout_gravity="top|center"/>
+			<ImageButton
+				android:id="@+id/stopped"
+				android:layout_width="80dp"
+				android:layout_height="80dp"
+				android:layout_weight="1"
+				android:layout_gravity="center"
+				android:background="@drawable/stop"
+				android:visibility="gone"/>
 
+			<ImageButton
+				android:id="@+id/started"
+				android:layout_width="80dp"
+				android:layout_height="80dp"
+				android:layout_weight="1"
+				android:layout_gravity="center"
+				android:background="@drawable/start"/>
 		</FrameLayout>
 
-		<ProgressBar
-			android:layout_gravity="center"
-			android:id="@+id/progesssbarOfMusic"
-			android:layout_width="160dp"
-			android:layout_height="10dp"
-			android:background="@drawable/progressbargreen"
-			android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
-			android:indeterminateOnly="false"
-			android:max="100"
-			android:maxHeight="50dp"
-			android:progress="0"
-			android:progressDrawable="@drawable/progressbargreen"/>
+
 
 	</LinearLayout>
 
@@ -81,6 +78,7 @@
 		<Button
 			android:layout_width="match_parent"
 			android:layout_height="40dp"
+			android:layout_weight="1"
 			android:text="完成"
 			android:layout_margin="2dp"
 			android:id="@+id/finishPlay"

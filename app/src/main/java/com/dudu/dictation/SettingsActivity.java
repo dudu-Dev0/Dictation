@@ -2,20 +2,15 @@ package com.dudu.dictation;
 
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
-import android.view.View;
 
-import com.xtc.shareapi.share.shareobject.XTCAppExtendObject;
-import com.xtc.shareapi.share.shareobject.XTCShareMessage;
-import android.graphics.BitmapFactory;
-import com.xtc.shareapi.share.communication.SendMessageToXTC;
-import com.xtc.shareapi.share.manager.ShareMessageManager;
+import com.suke.widget.SwitchButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 
-import android.widget.Toast;
 
 
 public class SettingsActivity extends Activity {
@@ -23,34 +18,63 @@ public class SettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Toast.makeText(SettingsActivity.this,"此功能作者还没有做",Toast.LENGTH_SHORT).show();
-    
-        // 查找 include 的 id, 其实找到的是 res/layout/include_switch.xml 的根布局
-        LinearLayout layout=findViewById(R.id.item_switch);
-        // 在上面的根布局上, 再次查找 Switch 的 id, 就能找到我们的 Switch 控件了
-        Switch layout_switch=layout.findViewById(R.id.switch_widget);
-        Button btshare = (Button) findViewById(R.id.btshare);
-        btshare.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    XTCAppExtendObject xtcAppExtendObject = new XTCAppExtendObject();
-                    xtcAppExtendObject.setStartActivity(MainActivity.class.getName());
-                    xtcAppExtendObject.setExtInfo("ExtendInfo");
-                    XTCShareMessage xtcShareMessage = new XTCShareMessage();
-                    xtcShareMessage.setShareObject(xtcAppExtendObject);
-                    xtcShareMessage.setThumbImage(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
-                    xtcShareMessage.setDescription("快来安装dudu开发的听写吧");
-                    SendMessageToXTC.Request request = new SendMessageToXTC.Request();
-                    request.setMessage(xtcShareMessage);
-                    new ShareMessageManager(SettingsActivity.this).sendRequestToXTC(request, "appKey");
 
-                }
+        SwitchButton autoDel = (SwitchButton) findViewById(R.id.autoDel);
+        SwitchButton scrambleTheOrder = (SwitchButton) findViewById(R.id.scrambleTheOrder);
+        Button btshare = findViewById(R.id.btshare);
+        LinearLayout toSetLoopTimes = findViewById(R.id.toSetLoopTimes);
+        LinearLayout toSetBroadcastInterval = findViewById(R.id.toSetBroadcastInterval);
 
-            });
-        
+        SharedPreferences getSPData = getSharedPreferences("settings",MODE_PRIVATE);
+        boolean settingsOfAutoDel = getSPData.getBoolean("autoDel",false);
+        boolean settingsOfScrambleTheOrder = getSPData.getBoolean("scrambleTheOrder",true);
+        autoDel.setChecked(settingsOfAutoDel);
+        scrambleTheOrder.setChecked(settingsOfScrambleTheOrder);
 
+
+
+        autoDel.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                SharedPreferences.Editor setter = getSharedPreferences("settings",MODE_PRIVATE).edit();
+                setter.putBoolean("autoDel",isChecked);
+                setter.apply();
+            }
+        });
+        scrambleTheOrder.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                SharedPreferences.Editor setter = getSharedPreferences("settings",MODE_PRIVATE).edit();
+                setter.putBoolean("scrambleTheOrder",isChecked);
+                setter.apply();
+            }
+        });
+        toSetLoopTimes.setOnClickListener(view -> {
+            Intent intent = new Intent(SettingsActivity.this,SetLoopTimesActivity.class);
+            startActivityForResult(intent,2);
+        });
+        toSetBroadcastInterval.setOnClickListener(view -> {
+            Intent intent = new Intent(SettingsActivity.this,SetBroadcastIntervalActivity.class);
+            startActivityForResult(intent,3);
+        });
+
+
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        SharedPreferences.Editor SPEditor = getSharedPreferences("settings",MODE_PRIVATE).edit();
+        switch(requestCode){
+            case 2:
+                int loopTimes = data.getIntExtra("loopTimes",1);
+                SPEditor.putInt("loopTimes",loopTimes);
+                SPEditor.apply();
+            case 3:
+                int broadcastInterval = data.getIntExtra("broadcastInterval",3000);
+                SPEditor.putInt("broadcastInterval",broadcastInterval);
+                SPEditor.apply();
+        }
     }
 
 
-};
-
+}
